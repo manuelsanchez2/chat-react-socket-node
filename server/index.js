@@ -3,6 +3,8 @@ const express = require("express");
 const socketio = require("socket.io");
 // const cors = require("cors");
 
+const { addUser, removeUser, getUser, getUsersInRoom } = require("./users");
+
 const PORT = process.env.PORT || 5000;
 
 const router = require("./router");
@@ -14,10 +16,32 @@ const io = socketio(server);
 // app.use(cors());
 
 io.on("connection", (socket) => {
-  console.log("We have a new connection!!!");
-
   socket.on("join", ({ name, room }, callback) => {
-    console.log(name, room);
+    const { error, user } = addUser({ id: socket.id, name, room });
+
+    if (error) return callback(error);
+    // This is a message that only you are going to receive as an user
+    socket.emit("message", {
+      user: "admin",
+      text: `Hi, ${user.name}, and welcome to the room ${user.room}`,
+    });
+    // This is a message that the whole room apart from the person receives
+
+    socket.broadcast.to(user.room).emit("message", {
+      user: "admin",
+      text: `${user.name} just joined the room. Say hello!`,
+    });
+
+    socket.join(user.room);
+    callback();
+  });
+
+  socket.on("sendMessage", (message, callback) => {
+    const user = getUser(socket.id);
+
+    io.to(user.room).emit("message", { user: user.name, text: message });
+
+    callback();
   });
 
   socket.on("disconnect", () => {
