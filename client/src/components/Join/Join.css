@@ -1,0 +1,57 @@
+.joinOuterContainer {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  min-height: 98.5vh;
+  align-items: center;
+  background-color: #328ba2;
+}
+
+.joinInnerContainer {
+  width: 25%;
+}
+
+.joinInput {
+  border-radius: 5px;
+  border: 1px solid white;
+  padding: 15px 20px;
+  width: 80%;
+}
+
+.heading {
+  color: white;
+  font-size: 2.5em;
+  padding-bottom: 10px;
+  border-bottom: 2px solid white;
+}
+
+.joinButton {
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #2979ff;
+  padding: 10px 45px;
+  border-radius: 15px;
+  display: inline-block;
+  border: 1px solid white;
+  transition: 0.5s ease-in-out;
+}
+
+.joinButton:focus {
+  outline: none;
+  background: green;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .joinOuterContainer {
+    height: 100%;
+  }
+
+  .joinInnerContainer {
+    width: 90%;
+  }
+}
