@@ -13,6 +13,8 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
+app.use(router);
+
 // app.use(cors());
 
 io.on("connection", (socket) => {
@@ -21,6 +23,8 @@ io.on("connection", (socket) => {
 
     if (error) return callback(error);
     // This is a message that only you are going to receive as an user
+    socket.join(user.room);
+
     socket.emit("message", {
       user: "admin",
       text: `Hi, ${user.name}, and welcome to the room ${user.room}`,
@@ -32,7 +36,10 @@ io.on("connection", (socket) => {
       text: `${user.name} just joined the room. Say hello!`,
     });
 
-    socket.join(user.room);
+    io.to(user.room).emit("roomData", {
+      room: user.room,
+      users: getUsersInRoom(user.room),
+    });
     callback();
   });
 
@@ -48,7 +55,5 @@ io.on("connection", (socket) => {
     console.log("User abandoned the session");
   });
 });
-
-app.use(router);
 
 server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
