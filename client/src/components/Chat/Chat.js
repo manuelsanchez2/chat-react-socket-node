@@ -54,7 +54,7 @@ const Chat = ({ location }) => {
     <div className="outerContainer">
       <div className="container">
         <input
-          valeu={message}
+          value={message}
           onChange={(event) => setMessage(event.target.value)}
           onKeyPress={(event) =>
             event.key === "Enter" ? sendMessage(event) : null
