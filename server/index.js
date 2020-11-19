@@ -23,7 +23,6 @@ io.on("connection", (socket) => {
 
     if (error) return callback(error);
     // This is a message that only you are going to receive as an user
-    socket.join(user.room);
 
     socket.emit("message", {
       user: "admin",
@@ -36,10 +35,13 @@ io.on("connection", (socket) => {
       text: `${user.name} just joined the room. Say hello!`,
     });
 
-    io.to(user.room).emit("roomData", {
-      room: user.room,
-      users: getUsersInRoom(user.room),
-    });
+    // io.to(user.room).emit("roomData", {
+    //   room: user.room,
+    //   users: getUsersInRoom(user.room),
+    // });
+
+    socket.join(user.room);
+
     callback();
   });
 
