@@ -1,7 +1,7 @@
 const http = require("http");
 const express = require("express");
 const socketio = require("socket.io");
-// const cors = require("cors");
+const cors = require("cors");
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require("./users");
 
@@ -15,7 +15,7 @@ const io = socketio(server);
 
 app.use(router);
 
-// app.use(cors());
+app.use(cors());
 
 io.on("connection", (socket) => {
   socket.on("join", ({ name, room }, callback) => {
@@ -35,10 +35,10 @@ io.on("connection", (socket) => {
       text: `${user.name} just joined the room. Say hello!`,
     });
 
-    // io.to(user.room).emit("roomData", {
-    //   room: user.room,
-    //   users: getUsersInRoom(user.room),
-    // });
+    io.to(user.room).emit("roomData", {
+      room: user.room,
+      users: getUsersInRoom(user.room),
+    });
 
     socket.join(user.room);
 
@@ -49,12 +49,24 @@ io.on("connection", (socket) => {
     const user = getUser(socket.id);
 
     io.to(user.room).emit("message", { user: user.name, text: message });
+    // io.to(user.room).emit("message", {
+    //   room: user.room,
+    //   users: getUsersInRoom(user.room),
+    // });
 
     callback();
   });
 
   socket.on("disconnect", () => {
     console.log("User abandoned the session");
+    const user = removeUser(socket.id);
+
+    if (user) {
+      io.to(user.room).emit("message", {
+        user: "admin",
+        text: `${user.name} left the room`,
+      });
+    }
   });
 });
 

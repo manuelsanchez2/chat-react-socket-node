@@ -1,0 +1,36 @@
+.form {
+  display: flex;
+  border-top: 2px solid #d3d3d3;
+}
+
+.input {
+  border: none;
+  border-radius: 0;
+  padding: 5%;
+  width: 80%;
+  font-size: 1.2em;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+.sendButton {
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #328ba2;
+  padding: 13px;
+  display: inline-block;
+  border: none;
+  width: 20%;
+}
+
+@media (min-width: 320px) and (max-width: 1200px) {
+  .form {
+    position: sticky;
+    bottom: 0;
+  }
+}
