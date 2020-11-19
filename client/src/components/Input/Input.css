@@ -22,8 +22,15 @@ select:focus {
   text-transform: uppercase;
   text-decoration: none;
   background: #328ba2;
-  padding: 20px;
+  padding: 13px;
   display: inline-block;
   border: none;
   width: 20%;
+}
+
+@media (min-width: 320px) and (max-width: 1200px) {
+  .form {
+    position: sticky;
+    bottom: 0;
+  }
 }
