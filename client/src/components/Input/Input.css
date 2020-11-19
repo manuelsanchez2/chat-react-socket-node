@@ -27,10 +27,3 @@ select:focus {
   border: none;
   width: 20%;
 }
-
-@media (min-width: 320px) and (max-width: 1200px) {
-  .form {
-    position: sticky;
-    bottom: 0;
-  }
-}

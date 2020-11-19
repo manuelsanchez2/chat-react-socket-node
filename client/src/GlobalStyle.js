@@ -13,7 +13,6 @@ const GlobalStyles = () => {
 
         #root {
           height: 100vh;
-          width: 100vw;
         }
 
         html,
@@ -22,7 +21,6 @@ const GlobalStyles = () => {
             Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
           padding: 0;
           margin: 0;
-          height: 100vh;
         }
       `}
     />

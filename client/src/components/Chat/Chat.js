@@ -8,6 +8,8 @@ import Messages from "../Messages";
 import Input from "../Input";
 import TextContainer from "../TextContainer/TextContainer";
 
+const ENDPOINT = "https://react-chat-socketio-node.herokuapp.com/";
+
 let socket;
 
 const Chat = ({ location }) => {
@@ -16,8 +18,6 @@ const Chat = ({ location }) => {
   const [users, setUsers] = useState("");
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
-
-  const ENDPOINT = "https://react-chat-socketio-node.herokuapp.com/";
 
   useEffect(() => {
     const { name, room } = queryString.parse(location.search);
