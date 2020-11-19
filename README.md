@@ -4,5 +4,5 @@ This application has been created by following a detailed tutorial on https://ww
 
 Some of the styling has been changed, but the main purpose of this project was to learn to implement Socket.io with React.js and Node.js.
 
-Server is deployed on Heroku.
-Frontend is deployed on Netlify.
+Server is deployed on Heroku - https://react-chat-socketio-node.herokuapp.com/
+Frontend is deployed on Netlify. TBA
